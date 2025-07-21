@@ -1,0 +1,6 @@
+{
+  "name": "Synapse Codex V_1.3",
+  "description": "An application to document the future and orchestrate agents. Converts large documents into versioned, manageable 'mini-files' and tracks their processing status using a central 'Living Document', powered by the Gemini API.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

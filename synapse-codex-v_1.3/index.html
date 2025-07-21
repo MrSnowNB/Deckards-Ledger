@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#121212">
+    <title>Synapse Codex</title>
+    <!-- Synapse Codex rebrand: Add new favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🧠%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --font-display: 'Orbitron', sans-serif;
+        --font-mono: 'IBM Plex Mono', monospace;
+        /* ALICE EASTER EGG: Font for Wonderland */
+        --font-wonderland: 'UnifrakturMaguntia', cursive;
+
+        --color-bg: #121212;
+        --color-bg-light: #1e1e1e;
+        --color-bg-lighter: #2a2a2a;
+        
+        --color-text-primary: #E0E0E0;
+        --color-text-secondary: #a0a0a0;
+
+        --color-accent-blue: #24fefe;
+        --color-accent-magenta: #fe23d6;
+        --color-accent-green: #bcff28;
+        --color-accent-purple: #a259fa;
+        
+        --glow-blue: 0 0 5px rgba(36, 254, 254, 0.7), 0 0 10px rgba(36, 254, 254, 0.5);
+        --glow-magenta: 0 0 5px rgba(254, 35, 214, 0.7), 0 0 10px rgba(254, 35, 214, 0.5);
+        --glow-green: 0 0 5px rgba(188, 255, 40, 0.8), 0 0 10px rgba(188, 255, 40, 0.6);
+        --glow-purple: 0 0 5px rgba(162, 89, 250, 0.7), 0 0 10px rgba(162, 89, 250, 0.5);
+        --glow-red: 0 0 5px rgba(255, 82, 82, 0.7), 0 0 10px rgba(255, 82, 82, 0.5);
+        --glow-amber: 0 0 5px rgba(251, 191, 36, 0.7), 0 0 10px rgba(251, 191, 36, 0.5);
+      }
+      
+      body {
+        font-family: var(--font-mono);
+        background-color: var(--color-bg);
+        color: var(--color-text-primary);
+      }
+
+      /* Custom scrollbar for dark theme */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1f1f1f;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4a4a4a; 
+        border-radius: 10px;
+        border: 2px solid #1f1f1f;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-accent-purple);
+      }
+
+      @keyframes fade-in-right {
+        from {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .animate-fade-in-right {
+        animation: fade-in-right 0.5s ease-out forwards;
+      }
+
+      /* --- Cyberpunk Animations --- */
+
+      @keyframes animated-gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .animated-gradient {
+        background-size: 200% 200%;
+        animation: animated-gradient 3s ease infinite;
+      }
+      
+      .animated-gradient-magenta {
+        background-image: linear-gradient(45deg, var(--color-accent-magenta), var(--color-accent-purple), var(--color-accent-magenta));
+      }
+      .animated-gradient-blue {
+         background-image: linear-gradient(45deg, var(--color-accent-blue), var(--color-accent-purple), var(--color-accent-blue));
+      }
+      .animated-gradient-primary {
+        background-image: linear-gradient(45deg, var(--color-accent-purple), var(--color-accent-blue), var(--color-accent-purple));
+      }
+
+      @keyframes pulse-green {
+        0% { box-shadow: 0 0 0 0 rgba(188, 255, 40, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(188, 255, 40, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(188, 255, 40, 0); }
+      }
+      .animate-pulse-green { animation: pulse-green 1.5s ease-out; }
+
+      @keyframes pulse-amber {
+        0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+      }
+      .animate-pulse-amber { animation: pulse-amber 1.5s ease-out; }
+
+      @keyframes pulse-blue {
+        0% { box-shadow: 0 0 0 0 rgba(36, 254, 254, 0.5); }
+        70% { box-shadow: 0 0 0 8px rgba(36, 254, 254, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(36, 254, 254, 0); }
+      }
+      .animate-pulse-blue { animation: pulse-blue 1.5s ease-out; }
+      
+      @keyframes scanlines {
+        0% { background-position: 0 0; }
+        100% { background-position: 0 100%; }
+      }
+
+      .scanline-overlay {
+        position: relative;
+        overflow: hidden;
+      }
+      .scanline-overlay::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(rgba(18, 18, 18, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background-size: 100% 4px, 6px 100%;
+        z-index: 2;
+        pointer-events: none;
+        animation: scanlines 10s linear infinite;
+        opacity: 0.3;
+      }
+
+      /* Synapse Codex rebrand: New boot screen animations */
+      @keyframes fade-in-out-boot {
+        0% { opacity: 0; }
+        20%, 80% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+      @keyframes blink-boot-cursor {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+
+      /* --- Synapse Console Animations & Styles --- */
+      @keyframes blink-cursor {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+      .blink-cursor {
+        animation: blink-cursor 1s step-end infinite;
+      }
+      
+      .terminal-input-cursor {
+        background-color: var(--color-accent-green);
+        display: inline-block;
+        width: 10px;
+        height: 1.2em;
+        vertical-align: middle;
+        margin-left: 4px;
+      }
+
+      /* --- ALICE EASTER EGG --- */
+      @keyframes portal-zoom {
+        0% { transform: scale(0.1) rotate(0deg); opacity: 0; }
+        80% { transform: scale(1.2) rotate(360deg); opacity: 1; }
+        100% { transform: scale(1) rotate(360deg); opacity: 1; }
+      }
+      .animate-portal-zoom { animation: portal-zoom 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+
+      @keyframes text-glitch {
+        0% { text-shadow: 0.05em 0 0 #00ff00, -0.05em 0 0 #ff0000; }
+        25% { text-shadow: 0.05em 0 0 #00ff00, -0.05em 0 0 #ff0000; }
+        50% { text-shadow: 0.02em 0.02em 0 #0000ff, -0.02em -0.02em 0 #ff00ff; }
+        100% { text-shadow: none; }
+      }
+      .text-glitch { animation: text-glitch 0.5s infinite alternate; }
+
+      @keyframes wonderland-gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .wonderland-gradient {
+        background-size: 300% 300%;
+        background-image: linear-gradient(-45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+        animation: wonderland-gradient 10s ease infinite;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.10.0",
+    "uuid": "https://esm.sh/uuid@^11.1.0",
+    "jszip": "https://esm.sh/jszip@^3.10.1",
+    "@jest/globals": "https://esm.sh/@jest/globals@^30.0.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="antialiased">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
